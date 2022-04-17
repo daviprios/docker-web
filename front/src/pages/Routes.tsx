@@ -14,6 +14,7 @@ const Routes = () => {
       <Switch>
         <Route path='/' element={<Layout/>}>
           <Route index element={<Home/>}/>
+          <Route path='*' element={<p>Not Found</p>}/>
         </Route>
       </Switch>
     </BrowserRouter>

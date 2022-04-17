@@ -1,0 +1,17 @@
+services:
+  back:
+    build: ./back
+    container_name: back
+    networks:
+      - docker-web
+  nginx:
+    build: ./front
+    container_name: nginx
+    networks:
+      - docker-web
+    ports:
+      - "3000:80"
+      - "3001:8000"
+networks:
+  docker-web:
+    driver: bridge
