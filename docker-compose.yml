@@ -1,4 +1,9 @@
 services:
+  api:
+    build: ./api
+    container_name: api
+    networks:
+      - docker-web
   back:
     build: ./back
     container_name: back
@@ -7,6 +12,15 @@ services:
   front:
     build: ./front
     container_name: front
+    networks:
+      - docker-web
+    volumes:
+      - static-pages:/volume/
+    depends_on:
+      - nginx
+  web:
+    build: ./web
+    container_name: web
     networks:
       - docker-web
     volumes:
