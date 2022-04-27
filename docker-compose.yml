@@ -4,11 +4,6 @@ services:
     container_name: api
     networks:
       - docker-web
-  back:
-    build: ./back
-    container_name: back
-    networks:
-      - docker-web
   front:
     build: ./front
     container_name: front
