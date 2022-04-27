@@ -4,14 +4,27 @@ services:
     container_name: back
     networks:
       - docker-web
-  nginx:
+  front:
     build: ./front
+    container_name: front
+    networks:
+      - docker-web
+    volumes:
+      - static-pages:/volume/
+    depends_on:
+      - nginx
+  nginx:
+    build: ./nginx
     container_name: nginx
     networks:
       - docker-web
     ports:
-      - "3000:80"
-      - "3001:8000"
+      - "80:80"
+    volumes:
+      - static-pages:/usr/share/nginx/html/
 networks:
   docker-web:
     driver: bridge
+volumes:
+  static-pages:
+    

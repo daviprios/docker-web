@@ -10,7 +10,7 @@ const paths = {
 
 const Routes = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='/front/'>
       <Switch>
         <Route path='/' element={<Layout/>}>
           <Route index element={<Home/>}/>

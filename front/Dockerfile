@@ -1,8 +1,11 @@
-FROM nginx
+FROM node:16 AS build
+WORKDIR /app
+COPY . .
+RUN npm install -g pnpm
+RUN pnpm install
+RUN pnpm run build
 
-COPY nginx.conf /etc/nginx/nginx.conf
-
-EXPOSE 80
-EXPOSE 8000
-
-COPY dist/ /usr/share/nginx/html
+FROM ubuntu
+WORKDIR /app/
+COPY --from=build /app/dist/ .
+ENTRYPOINT [ "cp", "-RT", "/app/", "/volume/front/" ]
